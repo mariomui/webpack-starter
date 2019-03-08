@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const path = require('path');
 
 const config = {
@@ -31,7 +30,8 @@ const config = {
   resolve: {
     extensions: [
       '.js',
-      '.jsx'
+      '.jsx',
+      '.json',
     ]
   }
 }
