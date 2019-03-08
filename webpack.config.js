@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
   mode: 'development',
@@ -27,6 +28,14 @@ const config = {
       }
     ]
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      // injects bundle.js to our new index.html
+      inject: true,
+      // copys the content of the existing index.html to the new /build index.html
+      template: path.resolve('./public/index.html')
+    })
+  ],
   resolve: {
     extensions: [
       '.js',
