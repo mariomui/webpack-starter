@@ -3,6 +3,7 @@ import React, { Fragment } from 'react'
 import Layout from './components/Layout.jsx'
 import { TodoList } from './components/Todolist.jsx'
 import { Form } from './components/Form.jsx'
+import { finished } from 'stream';
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -10,19 +11,46 @@ class App extends React.Component {
       todos: []
     }
   }
-  insertTodos = (e, todo, index) => {
+
+  insertTodos = (todo) => {
     let { todos } = this.state;
-    todo.ido = index
-    todos = todos.concat(todo);
+
+    todos.unshift(todo);
     this.setState({
       todos: todos
     })
   }
+
+  handleDirection = (index, direction) => {
+    let { todos } = this.state;
+    if (direction === 'up') {
+
+      if (index === 0) {
+        window.alert('nope')
+        return;
+      }
+      [todos[index], todos[index - 1]] = [todos[index - 1], todos[index]]
+      this.setState({
+        todos: todos
+      })
+    } else {
+      if (index === (todos.length - 1)) {
+        window.alert('nope');
+        return
+      }
+      [todos[index], todos[index + 1]] = [todos[index + 1], todos[index]]
+      this.setState({
+        todos: todos
+      })
+    }
+  }
+
   handleClose = (e, index) => {
     e.preventDefault()
-    const { todos } = this.state
+    let { todos } = this.state
+
     this.setState({
-      todos: todos.filter(todo => (todo.ido !== index))
+      todos: todos.filter((item) => (item.ido !== index)),
     })
   }
   render() {
@@ -32,7 +60,7 @@ class App extends React.Component {
 
         <Layout>
           <Form insertTodos={this.insertTodos} />
-          <TodoList todos={todos} handleClose={this.handleClose} />
+          <TodoList todos={todos} handleClose={this.handleClose} handleDirection={this.handleDirection} />
         </Layout>
 
       </Fragment >

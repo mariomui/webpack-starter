@@ -28,6 +28,7 @@ export class Form extends Component {
       heading: '',
       content: '',
       ido: 0,
+      time: ''
     }
   }
   componentDidMount() {
@@ -52,14 +53,35 @@ export class Form extends Component {
     })
   }
 
+  getTime = () => {
+    return new Promise((resolve) => {
+      var date = new Date()
+      var seconds = '' + date.getSeconds();
+      if (seconds.length === 1) {
+        seconds = '0'.concat(seconds);
+      }
+      var ms = date.getMilliseconds()
+      ms = ms / (('' + ms).length % 2 * 10)
+      if (ms === Infinity) {
+        ms = '00'
+      } else {
+        ms = ms.toString().split('.')[0]
+      }
+      resolve(`${date.toLocaleDateString()} ${date.getHours()}:${date.getMinutes()}:${seconds}:${ms}`);
+    })
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
-    let { ido } = this.state;
+    // let { content, heading } = this.state;
     const { insertTodos } = this.props
-    ido = ido + 1;
-    insertTodos(e, this.state, ido)
+    let hello = this.state
+    this.setState({ ido: this.state.ido + 1 }, () => {
+      insertTodos(hello)
+    })
     this.clear();
-    document.getElementsByClassName('focusHeading')[0].focus()
+
+    document.querySelector('.focusHeading').focus()
   }
 
   handleKeyPress = (e) => {
@@ -70,7 +92,7 @@ export class Form extends Component {
   render() {
     const { heading, content } = this.state
     return (
-      <FormCss style={{ width: '70vw', minWidth: '300px' }} onSubmit={this.handleSubmit}>
+      <FormCss style={{ width: '70vw', minWidth: '300px' }} onSubmit={this.handleSubmit} >
 
         <label htmlFor="heading">Heading:</label>
         <div>

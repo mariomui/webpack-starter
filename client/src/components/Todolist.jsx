@@ -9,14 +9,19 @@ export class TodoList extends Component {
     }
   }
   render() {
-    const { todos, handleClose } = this.props
+    let { todos, handleClose, handleDirection } = this.props
     return (
       <Fragment>
-        {todos.reverse().map((todo) => {
+        {todos.map((todo, key) => {
           return (
             <div>
 
-              <TodoListEntry todo={todo} key={todo.ido} handleClose={handleClose} />
+              <TodoListEntry
+                keyd={key}
+                todo={todo}
+                key={todo.ido}
+                handleDirection={handleDirection}
+                handleClose={handleClose} />
             </div>
           )
         })}
