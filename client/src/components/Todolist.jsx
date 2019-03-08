@@ -12,7 +12,7 @@ export class TodoList extends Component {
     const { todos, handleClose } = this.props
     return (
       <Fragment>
-        {todos.map((todo) => {
+        {todos.reverse().map((todo) => {
           return (
             <div>
 

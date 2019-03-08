@@ -1,0 +1,28 @@
+.flexrow {
+  display: flex;
+  width: 100vw;
+}
+
+.grid {
+  width: 100vw;
+}
+
+.colOne {
+  flex: 1;
+  order: 1;
+  width: 10%;
+}
+
+.colTwo {
+  font-size: 30px;
+
+  flex: 1;
+  order: 2;
+  width: 80%;
+}
+
+.colThree {
+  flex: 1;
+  order: 3;
+  width: 10%;
+}

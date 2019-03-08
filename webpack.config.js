@@ -31,9 +31,12 @@ const config = {
   plugins: [
     new HtmlWebpackPlugin({
       // injects bundle.js to our new index.html
-      inject: true,
+      hash: true,
       // copys the content of the existing index.html to the new /build index.html
-      template: path.resolve('./public/index.html')
+      myPageHeader: 'hey',
+      title: 'hey',
+      template: path.resolve(__dirname, './client/src/index.html'),
+      filename: path.resolve(__dirname, './public/index.html')
     })
   ],
   resolve: {
