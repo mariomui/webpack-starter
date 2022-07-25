@@ -6,7 +6,7 @@ const App = () => {
     <div>
 
       <div className={appCss.batman}>
-        l;lklkddd
+        l;lklkddddd
     </div>
       <div className={appCss.superman}></div>
     </div>
